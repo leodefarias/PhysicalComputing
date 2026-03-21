@@ -1,0 +1,27 @@
+#define ledG 7
+#define ledR 8
+int buzzer = 2;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledG, OUTPUT);
+  pinMode(ledR, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char comando = Serial.read();
+
+    if (comando == 'G') {
+      digitalWrite(ledG, HIGH);
+      digitalWrite(ledR, LOW);
+      noTone(buzzer); // desliga som
+    }
+    else if (comando == 'R') {
+      digitalWrite(ledG, LOW);
+      digitalWrite(ledR, HIGH);
+      tone(buzzer, 1000); // liga som
+    }
+  }
+}
